@@ -21,7 +21,7 @@ var app = express();
 passport.use(new TumblrStrategy({
     consumerKey: process.env.TUMBLR_CONSUMER_KEY,
     consumerSecret: process.env.TUMBLR_SECRET_KEY,
-    callbackURL: "http://localhost:3000/auth/tumblr/callback"
+    callbackURL: "https://stormy-tor-59875.herokuapp.com/auth/tumblr/callback"
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...
