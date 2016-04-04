@@ -21,17 +21,18 @@ var app = express();
 passport.use(new TumblrStrategy({
     consumerKey: process.env.TUMBLR_CONSUMER_KEY,
     consumerSecret: process.env.TUMBLR_SECRET_KEY,
-    callbackURL: "https://stormy-tor-59875.herokuapp.com/auth/tumblr/callback"
+    callbackURL: process.env.HOST + "/auth/tumblr/callback"
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
+      console.log("here is da profile", profile.username);
 
       // To keep the example simple, the user's Tumblr profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Tumblr account with a user record in your database,
       // and return that user instead.
-      return done(null, profile);
+      return done(null, profile.username);
     });
   }
 ));
@@ -81,6 +82,7 @@ app.get('/auth/tumblr',
 app.get('/auth/tumblr/callback',
   passport.authenticate('tumblr', { failureRedirect: '/login' }),
   function(req, res) {
+    console.log('session info', req.session);
     res.redirect('/');
   });
 
