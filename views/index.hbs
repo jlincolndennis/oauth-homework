@@ -1,3 +1,14 @@
 <h1>{{title}}</h1>
-<h2>Howdy {{username}}!</h2>
 <p>Welcome to {{title}}</p>
+
+{{#if user}}
+     <h2>
+       Hello {{user}}
+       |
+       <a href="/logout">Logout</a>
+     </h2>
+   {{else}}
+     <p>
+       <a href="/auth/tumblr">Login with Tumblr</a>
+     </p>
+   {{/if}}
